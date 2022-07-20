@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "276570054371",
+    "project_id": "menus-af14e",
+    "storage_bucket": "menus-af14e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:276570054371:android:e0f72687cadef77f14afd6",
+        "android_client_info": {
+          "package_name": "com.auroralab.menus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "276570054371-297kifiosp47d8rqkgsvtuqlcs0ih707.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC84ZXzpXt-83yIaQfwKfS0yxpCchdSIIw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "276570054371-297kifiosp47d8rqkgsvtuqlcs0ih707.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
