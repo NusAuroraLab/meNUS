@@ -1,21 +1,41 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:menus/pages/vendor/info_page.dart';
+import 'package:menus/screens/account_edit_screen.dart';
 import 'package:menus/screens/cart_screen.dart';
-import 'package:menus/screens/edit_profile_screen.dart';
 import 'package:menus/screens/orders_screen.dart';
 import 'package:menus/screens/sign_in_screen.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth.dart';
-import '../providers/profile.dart';
+import '../providers/profiles.dart';
 import '../utils/app_dimensions.dart';
 import '../utils/colors.dart';
 import '../widgets/account_widgets.dart';
 import 'main_screen.dart';
 
-class AccountScreen extends StatelessWidget {
+class AccountScreen extends StatefulWidget {
   static const routeName = '/account';
   const AccountScreen({Key? key}) : super(key: key);
+
+  @override
+  State<AccountScreen> createState() => _AccountScreenState();
+}
+
+class _AccountScreenState extends State<AccountScreen> {
+  _getFromGallery(String userId) async {
+    final ImagePicker _picker = ImagePicker();
+    final XFile? pickedFile = await _picker.pickImage(
+      source: ImageSource.gallery,
+      maxWidth: 1800,
+      maxHeight: 1800,
+    );
+    if (pickedFile != null) {
+      File imageFile = File(pickedFile.path);
+      Provider.of<Profile>(context, listen: false).upload(imageFile, userId);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,128 +70,106 @@ class AccountScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text("Profile"),
         backgroundColor: AppColors.primaryColor,
+        actions: [
+          TextButton(
+            child: Text(
+              'Edit',
+              style: TextStyle(
+                  fontSize: Dimensions.font22,
+                  color: Color.fromARGB(200, 255, 255, 255)),
+            ),
+            onPressed: () {
+              Navigator.of(context)
+                  .pushReplacementNamed(AccountEditScreen.routeName);
+            },
+          )
+        ],
       ),
-      body: Information(),
-    );
-  }
-}
-
-class Information extends StatelessWidget {
-  const Information({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: Provider.of<Profile>(context, listen: false)
-          .fetchAndSetProfile(Provider.of<Auth>(context).userId),
-      builder: (ctx, dataSnapshot) {
-        if (dataSnapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
-        } else {
-          return Consumer<Profile>(
-            builder: (ctx, userData, child) => Column(
-              children: [
-                SizedBox(
-                  height: Dimensions.height20,
-                ),
-                Container(
-                  width: 150,
-                  height: 150,
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      CircleAvatar(
-                        radius: 75,
-                        backgroundImage: NetworkImage(userData.imageUrl),
-                      ),
-                      Positioned(
-                        bottom: 20,
-                        right: 20,
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).pushReplacementNamed(
-                                EditProfileScreen.routeName);
-                          },
-                          child: ClipOval(
-                            child: Container(
-                              padding: EdgeInsets.all(2),
-                              color: Colors.white,
-                              child: ClipOval(
-                                child: Container(
-                                  padding: EdgeInsets.all(4),
-                                  color: AppColors.primaryColor,
-                                  child: Icon(
-                                    Icons.edit,
-                                    color: AppColors.accentColor,
-                                  ),
-                                ),
-                              ),
+      body: FutureBuilder(
+        future: Provider.of<Profile>(context, listen: false)
+            .fetchAndSetProfile(Provider.of<Auth>(context).userId),
+        builder: (ctx, dataSnapshot) {
+          if (dataSnapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else {
+            return Consumer<Profile>(
+              builder: (ctx, userData, child) => Column(
+                children: [
+                  SizedBox(
+                    height: Dimensions.height20,
+                  ),
+                  Container(
+                    width: 150,
+                    height: 150,
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        CircleAvatar(
+                          radius: 75,
+                          backgroundImage: NetworkImage(userData.imageUrl),
+                        ),
+                      ],
+                    ),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(75),
+                        color: AppColors.primaryColor),
+                  ),
+                  Expanded(
+                    child: Scrollbar(
+                      child: SingleChildScrollView(
+                        physics: BouncingScrollPhysics(),
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: Dimensions.height20,
                             ),
-                          ),
+                            AccountWidgets(userData.name,
+                                hint: 'User Name',
+                                icon: Icons.person,
+                                backgroundColor: AppColors.yellowColor),
+                            SizedBox(
+                              height: Dimensions.height20,
+                            ),
+                            AccountWidgets(userData.email,
+                                icon: Icons.email,
+                                backgroundColor: AppColors.primaryColor),
+                            SizedBox(
+                              height: Dimensions.height20,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                Navigator.of(context)
+                                    .pushNamed(OrdersScreen.routeName);
+                              },
+                              child: AccountWidgets('Order History',
+                                  icon: Icons.history,
+                                  backgroundColor: Colors.redAccent),
+                            ),
+                            SizedBox(
+                              height: Dimensions.height20,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                Navigator.pushNamedAndRemoveUntil(
+                                    context, '/', (r) => false);
+                                Provider.of<Auth>(context, listen: false)
+                                    .logout();
+                              },
+                              child: AccountWidgets("Log out",
+                                  icon: Icons.logout,
+                                  backgroundColor: Colors.red),
+                            ),
+                          ],
                         ),
                       ),
-                    ],
-                  ),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(75),
-                      color: AppColors.primaryColor),
-                ),
-                Expanded(
-                  child: Scrollbar(
-                    child: SingleChildScrollView(
-                      physics: BouncingScrollPhysics(),
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: Dimensions.height20,
-                          ),
-                          AccountWidgets(userData.name,
-                              icon: Icons.person,
-                              backgroundColor: AppColors.yellowColor),
-                          SizedBox(
-                            height: Dimensions.height20,
-                          ),
-                          AccountWidgets(userData.email,
-                              icon: Icons.email,
-                              backgroundColor: AppColors.primaryColor),
-                          SizedBox(
-                            height: Dimensions.height20,
-                          ),
-                          InkWell(
-                            onTap: () {
-                              Navigator.of(context)
-                                  .pushNamed(OrdersScreen.routeName);
-                            },
-                            child: AccountWidgets('Order History',
-                                icon: Icons.history,
-                                backgroundColor: Colors.redAccent),
-                          ),
-                          SizedBox(
-                            height: Dimensions.height20,
-                          ),
-                          InkWell(
-                            onTap: () {
-                              Navigator.pushNamedAndRemoveUntil(
-                                  context, '/', (r) => false);
-                              Provider.of<Auth>(context, listen: false)
-                                  .logout();
-                            },
-                            child: AccountWidgets("Log out",
-                                icon: Icons.logout,
-                                backgroundColor: Colors.red),
-                          ),
-                        ],
-                      ),
                     ),
-                  ),
-                )
-              ],
-            ),
-          );
-        }
-      },
+                  )
+                ],
+              ),
+            );
+          }
+        },
+      ),
     );
   }
 }

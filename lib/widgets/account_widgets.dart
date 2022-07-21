@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:menus/utils/app_dimensions.dart';
 
 import '../utils/colors.dart';
 import 'big_text.dart';
@@ -9,12 +10,14 @@ class AccountWidgets extends StatelessWidget {
   final IconData icon;
   final Color iconColor;
   final String text;
+  final String hint;
   const AccountWidgets(
     this.text, {
     Key? key,
     this.iconColor = Colors.white,
     required this.icon,
     required this.backgroundColor,
+    this.hint = '',
   }) : super(key: key);
 
   @override
@@ -32,6 +35,7 @@ class AccountWidgets extends StatelessWidget {
                 offset: Offset(2, 1))
           ]),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
             width: 50,

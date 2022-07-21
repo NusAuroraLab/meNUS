@@ -8,13 +8,13 @@ import '../providers/comments.dart';
 import '../utils/colors.dart';
 import '../widgets/read_rating.dart';
 
-class ReviewForm extends StatefulWidget {
-  static const routeName = '/edit-review';
+class CommentForm extends StatefulWidget {
+  static const routeName = '/comment-edit';
   @override
   _EditProductScreenState createState() => _EditProductScreenState();
 }
 
-class _EditProductScreenState extends State<ReviewForm> {
+class _EditProductScreenState extends State<CommentForm> {
   final _commentFocusNode = FocusNode();
   final _form = GlobalKey<FormState>();
   var _editedProduct = Comment('', DateTime.now(), '', 5, '');

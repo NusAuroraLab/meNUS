@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:intl/intl.dart';
-import 'package:menus/providers/profile.dart';
+import 'package:menus/providers/profiles.dart';
 import 'package:provider/provider.dart';
 import '../models/comment.dart';
 import '../providers/comments.dart';
@@ -177,7 +177,7 @@ class _CommentScreenState extends State<CommentScreen> {
                       onPressed: () {
                         Navigator.of(context)
                             .pushNamed(
-                          ReviewForm.routeName,
+                          CommentForm.routeName,
                           arguments: data,
                         )
                             .then((_) {

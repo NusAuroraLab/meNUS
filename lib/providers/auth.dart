@@ -58,7 +58,7 @@ class Auth with ChangeNotifier {
       );
       if (urlSegment == 'signUp') {
         final url = Uri.parse(
-            'https://menus-14551-default-rtdb.asia-southeast1.firebasedatabase.app/profile/$_userId.json');
+            'https://menus-14551-default-rtdb.asia-southeast1.firebasedatabase.app/profiles.json');
         final timestamp = DateTime.now();
         final response = await http.post(
           url,

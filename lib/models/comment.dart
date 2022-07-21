@@ -1,4 +1,4 @@
-import 'package:menus/providers/profile.dart';
+import 'package:menus/providers/profiles.dart';
 
 class Comment {
   final String id;

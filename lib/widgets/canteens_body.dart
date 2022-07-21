@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:menus/screens/map_screen.dart';
+import 'package:menus/utils/colors.dart';
 import 'package:menus/widgets/big_text.dart';
 import '../../widgets/small_text.dart';
 import '../models/canteen.dart';
@@ -66,18 +68,39 @@ class CanteensBody extends StatelessWidget {
                     ),
                   ),
                 ),
-                GestureDetector(
-                  child: Container(
-                    width: 30,
-                    height: 30,
-                    color: Colors.orange,
-                  ),
-                  onTap: () {
-                    Navigator.of(context).pushNamed(
-                      StallForm.routeName,
-                      arguments: canteens[index].id,
-                    );
-                  },
+                Column(
+                  children: [
+                    OutlinedButton(
+                        style: OutlinedButton.styleFrom(
+                          side: BorderSide(
+                            color: AppColors.accentColor,
+                          ),
+                          foregroundColor: AppColors.accentColor,
+                          backgroundColor: AppColors.primaryColor,
+                          elevation: 3,
+                        ),
+                        child: Text(
+                          '  Show\non Map',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pushNamed(MapScreen.routeName,
+                              arguments: canteens[index].location);
+                        }),
+                    GestureDetector(
+                      child: Container(
+                        width: 30,
+                        height: 30,
+                        color: Colors.orange,
+                      ),
+                      onTap: () {
+                        Navigator.of(context).pushNamed(
+                          StallForm.routeName,
+                          arguments: canteens[index].id,
+                        );
+                      },
+                    ),
+                  ],
                 ),
               ],
             ),

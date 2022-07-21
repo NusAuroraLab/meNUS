@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:menus/providers/profile.dart';
+import 'package:menus/providers/profiles.dart';
 import 'package:provider/provider.dart';
 
 import '../models/http_exception.dart';

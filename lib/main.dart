@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:menus/models/canteen.dart';
 import 'package:menus/pages/vendor/vendor_home_screen.dart';
+import 'package:menus/screens/account_edit_screen.dart';
 import 'package:menus/screens/account_screen.dart';
-import 'package:menus/screens/edit_profile_screen.dart';
 import 'package:menus/screens/food_detail_screen.dart';
 import 'package:menus/screens/comment_screen.dart';
 import 'package:menus/screens/main_screen.dart';
 import 'package:menus/screens/comment_form.dart';
+import 'package:menus/screens/map_screen.dart';
 import 'package:provider/provider.dart';
 import './providers/orders.dart';
 import './providers/auth.dart';
-import 'helper/custom_route.dart';
+import 'helpers/custom_route.dart';
 import 'providers/cart.dart';
 import 'providers/foods.dart';
-import 'providers/profile.dart';
+import 'providers/profiles.dart';
 import 'providers/comments.dart';
 import 'providers/stalls.dart';
 import 'screens/cart_screen.dart';
@@ -82,7 +83,6 @@ class MyApp extends StatelessWidget {
                           : SignInScreen(),
                 ),
           routes: {
-            EditProfileScreen.routeName: (ctx) => EditProfileScreen(),
             SignUpScreen.routeName: (ctx) => SignUpScreen(),
             SignInScreen.routeName: (ctx) => SignInScreen(),
             MainScreen.routeName: (ctx) => MainScreen(),
@@ -92,9 +92,11 @@ class MyApp extends StatelessWidget {
             OrdersScreen.routeName: (ctx) => OrdersScreen(),
             FoodForm.routeName: (ctx) => FoodForm(),
             StallForm.routeName: (ctx) => StallForm(),
-            ReviewForm.routeName: (ctx) => ReviewForm(),
+            CommentForm.routeName: (ctx) => CommentForm(),
             VendorHomeScreen.routeName: (ctx) => VendorHomeScreen(),
             CommentScreen.routeName: (ctx) => CommentScreen(),
+            MapScreen.routeName: (ctx) => MapScreen(),
+            AccountEditScreen.routeName: (ctx) => AccountEditScreen(),
           },
         ),
       ),
