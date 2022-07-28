@@ -135,12 +135,6 @@ class _EditProductScreenState extends State<FoodForm> {
                         );
                       },
                     ),
-                    SizedBox(
-                      height: 100,
-                      child: Container(
-                        color: Colors.amber,
-                      ),
-                    ),
                     TextFormField(
                       initialValue: _initValues['price'] as String,
                       decoration: InputDecoration(labelText: 'price'),

@@ -57,7 +57,7 @@ class _EditProductScreenState extends State<CommentForm> {
         builder: (ctx) => AlertDialog(
           title: Text('An Error Occurred!'),
           content: Text('Something went wrong.'),
-          actions: <Widget>[
+          actions: [
             TextButton(
               child: Text('Okay'),
               onPressed: () {

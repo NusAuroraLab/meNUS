@@ -13,8 +13,6 @@ class SignUpScreen extends StatelessWidget {
   SignUpScreen({Key? key}) : super(key: key);
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
-  var nameController = TextEditingController();
-  var phoneController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -296,9 +294,8 @@ class _AuthCardState extends State<AuthCard>
                         style: ElevatedButton.styleFrom(
                           primary: AppColors.primaryColor,
                           shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15),
+                            borderRadius: BorderRadius.circular(15),
                           ),
-                          
                         ),
                         child: Container(
                           width: Dimensions.screenSizeWidth * 0.5,

@@ -22,6 +22,7 @@ class _CommentScreenState extends State<CommentScreen> {
   Widget build(BuildContext context) {
     List<String> data =
         ModalRoute.of(context)!.settings.arguments as List<String>;
+    List<String> userNames = [];
     return Scaffold(
       appBar: AppBar(
         title: Text('Comments'),
@@ -44,6 +45,14 @@ class _CommentScreenState extends State<CommentScreen> {
               return Text('An Error Occurred!');
             } else {
               var comments = snapshot.data as List<Comment>;
+              for (int i = 0; i < comments.length; i++) {
+                Provider.of<Profile>(context, listen: false)
+                    .fetchAndSetProfile(
+                        comments[comments.length - 1 - i].userId)
+                    .then((value) {
+                  userNames.add(value[1]);
+                });
+              }
               return Column(
                 children: [
                   Container(
@@ -96,7 +105,11 @@ class _CommentScreenState extends State<CommentScreen> {
                                               Container(
                                                 width: Dimensions.width20 * 6,
                                                 child: SmallText(
-                                                  text: userData[1],
+                                                  text: comments[
+                                                          comments.length -
+                                                              1 -
+                                                              index]
+                                                      .userId,
                                                   maxLine: 1,
                                                   size: Dimensions.font22,
                                                   color: Colors.black,

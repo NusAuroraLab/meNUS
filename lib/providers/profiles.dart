@@ -30,6 +30,7 @@ class Profile with ChangeNotifier {
   }
 
   Future<List<String>> fetchAndSetProfile(String userId) async {
+    print('555userId: ${userId}');
     final url = Uri.parse(
         'https://menus-14551-default-rtdb.asia-southeast1.firebasedatabase.app/profiles.json');
     try {
@@ -74,6 +75,5 @@ class Profile with ChangeNotifier {
 
     var uri = Uri.parse(
         'https://menus-14551-default-rtdb.asia-southeast1.firebasedatabase.app/profile/$userId.json');
-    print(userId);
   }
 }
