@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:menus/models/canteen.dart';
+import 'package:menus/pages/vendor/add_food_form.dart';
 import 'package:menus/pages/vendor/vendor_home_screen.dart';
 import 'package:menus/screens/account_edit_screen.dart';
 import 'package:menus/screens/account_screen.dart';
@@ -97,6 +98,7 @@ class MyApp extends StatelessWidget {
             CommentScreen.routeName: (ctx) => CommentScreen(),
             MapScreen.routeName: (ctx) => MapScreen(),
             AccountEditScreen.routeName: (ctx) => AccountEditScreen(),
+            AddFoodForm.routeName: (ctx) => AddFoodForm(),
           },
         ),
       ),

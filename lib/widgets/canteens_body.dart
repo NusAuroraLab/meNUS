@@ -75,7 +75,7 @@ class CanteensBody extends StatelessWidget {
                           side: BorderSide(
                             color: AppColors.accentColor,
                           ),
-                          foregroundColor: AppColors.accentColor,
+                          // foregroundColor: AppColors.accentColor,
                           backgroundColor: AppColors.primaryColor,
                           elevation: 3,
                         ),

@@ -198,7 +198,7 @@ class _CommentScreenState extends State<CommentScreen> {
                         });
                       },
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white,
+                          primary: Colors.white,
                           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                           elevation: 0),
                     ),
